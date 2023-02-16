@@ -27,14 +27,13 @@ let TrackService = class TrackService {
     }
     async create(dto, picture, audio, userId) {
         const audioPath = this.fileService.createFile(file_service_1.FileType.AUDIO, audio);
-        let picturePath = null;
-        if (picture) {
-            picturePath = this.fileService.createFile(file_service_1.FileType.IMAGE, picture);
-        }
+        const picturePath = picture
+            ? this.fileService.createFile(file_service_1.FileType.IMAGE, picture)
+            : null;
         const track = await this.trackModel.create(Object.assign(Object.assign({}, dto), { listens: 0, audio: audioPath, picture: picturePath, user: userId }));
         return track;
     }
-    async getAll(count = 10, offset = 0) {
+    async getAll(count = 30, offset = 0) {
         const tracks = await this.trackModel.find().skip(offset).limit(count);
         return tracks;
     }

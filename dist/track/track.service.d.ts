@@ -9,7 +9,7 @@ export declare class TrackService {
     private commentModel;
     private fileService;
     constructor(trackModel: Model<TrackDocument>, commentModel: Model<CommentDocument>, fileService: FileService);
-    create(dto: CreateTrackDto, picture: any, audio: any, userId: ObjectId): Promise<Track>;
+    create(dto: CreateTrackDto, picture: File, audio: File, userId: ObjectId): Promise<Track>;
     getAll(count?: number, offset?: number): Promise<Track[]>;
     getNew(count?: number, offset?: number): Promise<Track[]>;
     getPopular(count?: number, offset?: number): Promise<Track[]>;
