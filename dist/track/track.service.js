@@ -27,7 +27,10 @@ let TrackService = class TrackService {
     }
     async create(dto, picture, audio, userId) {
         const audioPath = this.fileService.createFile(file_service_1.FileType.AUDIO, audio);
-        const picturePath = this.fileService.createFile(file_service_1.FileType.IMAGE, picture);
+        let picturePath = null;
+        if (picture) {
+            picturePath = this.fileService.createFile(file_service_1.FileType.IMAGE, picture);
+        }
         const track = await this.trackModel.create(Object.assign(Object.assign({}, dto), { listens: 0, audio: audioPath, picture: picturePath, user: userId }));
         return track;
     }

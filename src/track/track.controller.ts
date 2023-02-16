@@ -8,7 +8,6 @@ import {
   Post,
   Query,
   Req,
-  Res,
   UploadedFiles,
   UseGuards,
   UseInterceptors,
@@ -33,7 +32,12 @@ export class TrackController {
   )
   create(@UploadedFiles() files, @Body() dto: CreateTrackDto, @Req() req) {
     const { picture, audio } = files;
-    return this.trackService.create(dto, picture[0], audio[0], req.userId);
+    return this.trackService.create(
+      dto,
+      picture ? picture[0] : null,
+      audio[0],
+      req.userId,
+    );
   }
 
   @Get()

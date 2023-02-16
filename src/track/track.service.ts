@@ -27,7 +27,10 @@ export class TrackService {
     userId: ObjectId,
   ): Promise<Track> {
     const audioPath = this.fileService.createFile(FileType.AUDIO, audio);
-    const picturePath = this.fileService.createFile(FileType.IMAGE, picture);
+    let picturePath = null;
+    if (picture) {
+      picturePath = this.fileService.createFile(FileType.IMAGE, picture);
+    }
     const track = await this.trackModel.create({
       ...dto,
       listens: 0,
